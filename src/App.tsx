@@ -22,6 +22,12 @@ function App() {
     setSigner(signer);
   }
  
+  const sendTransaction = () => {
+    signer?.sendTransaction({
+      to: '0x6Bed0aaB296f682091F6A11bA27ef797b630AbC6',
+      value: ethers.utils.parseEther('.01')
+    })
+  }
 
 
  const main = async () => {
@@ -37,6 +43,7 @@ function App() {
       <button onClick={() => connect()}> connect wallet </button>
       <h1>{eth}</h1>
       <button onClick={() => console.log(signer)}> what is the signer </button>
+      <button onClick={() => sendTransaction()}> Send transaction </button>
     </div>
   );
 }
