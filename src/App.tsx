@@ -7,6 +7,7 @@ function App() {
   const [eth, setEth] = useState('')
   const [address, setAddress] = useState('')
   const [sendAddress, setSendAddress] = useState('')
+  const [value, setValue] = useState('')
   const [signer, setSigner] = useState<ethers.providers.JsonRpcSigner>()
   
   const INFURA_ID = 'c70d9d442c00407c9b4efbf74e4a4054'
@@ -26,7 +27,7 @@ function App() {
   const sendTransaction = () => {
     signer?.sendTransaction({
       to: sendAddress,
-      value: ethers.utils.parseEther('.01')
+      value: ethers.utils.parseEther(`${value}`)
     })
   }
 
@@ -42,6 +43,7 @@ function App() {
       <input placeholder="Find account balance" onChange={event => setAddress(event.target.value)}></input>
       <button onClick={() => main()}> click me </button>
       <input placeholder="Send tx to this account" onChange={event => setSendAddress(event.target.value)}></input>
+      <input placeholder="# of eth to send" onChange={event => setValue(event.target.value)}></input>
       <button onClick={() => sendTransaction()}> Send transaction </button>
       <div>
         <button onClick={() => connect()}> connect wallet </button>
