@@ -58,8 +58,9 @@ function App() {
   }
 
   const reset = () => {
-    setEth('')
-    setText(false)
+    setEth('');
+    setText(false);
+    setSendAddress('');
   }
   
   return (
@@ -92,7 +93,6 @@ function App() {
             <div>
               <button onClick={() => connect()}> connect wallet </button>
               <h3>{metamask}</h3>
-              <button onClick={() => console.log(signer)}> what is the signer </button>
             </div>
           </div>
           )
