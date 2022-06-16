@@ -61,6 +61,7 @@ function App() {
     setEth('');
     setText(false);
     setSendAddress('');
+    setAddress('');
   }
   
   return (
@@ -78,7 +79,7 @@ function App() {
         if(page === 'query') {
           return(
             <div className="Body">
-              <input placeholder="Find account balance" onChange={event => setAddress(event.target.value)}></input>
+              <input placeholder="Find account balance" onChange={event => setAddress(event.target.value)} value={address}></input>
               <button onClick={() => main()}> click me </button>
               <Greeting />
             </div>
@@ -87,8 +88,8 @@ function App() {
         if(page === 'transact') {
           return(
           <div className="Body">
-            <input placeholder="Send tx to this account" onChange={event => setSendAddress(event.target.value)}></input>
-            <input placeholder="# of eth to send" onChange={event => setValue(event.target.value)}></input>
+            <input placeholder="Send tx to this account" onChange={event => setSendAddress(event.target.value)} value={sendAddress}></input>
+            <input placeholder="# of eth to send" onChange={event => setValue(event.target.value)} value={value}></input>
             <button onClick={() => sendTransaction()}> Send transaction </button>
             <div>
               <button onClick={() => connect()}> connect wallet </button>
