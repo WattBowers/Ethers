@@ -11,6 +11,7 @@ function App() {
   const [signer, setSigner] = useState<ethers.providers.JsonRpcSigner>()
   const [page, setPage] = useState('')
   const [metamask, setMetamask] = useState('')
+  const [text, setText] = useState(false)
   
   const INFURA_ID = 'c70d9d442c00407c9b4efbf74e4a4054'
   const provider = new ethers.providers.JsonRpcProvider(`https://kovan.infura.io/v3/${INFURA_ID}`)
@@ -39,33 +40,52 @@ function App() {
     }
   }
 
+  
+  function Greeting() {
+    
+    if (text === true) {
+      return <h1>There is {eth} Eth in the account</h1>;
+    } else {
+      return <h1>Paste in an Etherium address to find the amount of Eth in it</h1>;
+    }
+    
+  }
+
  const main = async () => {
     const balance = await provider.getBalance(`${address}`)
-    console.log(ethers.utils.formatEther(balance))
     setEth(ethers.utils.formatEther(balance))
+    setText(true);
+  }
+
+  const reset = () => {
+    setEth('')
+    setText(false)
   }
   
   return (
     <div className="App">
-      <div>
+      <div className="Header">
         <h1>This website uses the Kovan test network, you can query the blockchain or use metamask to send test transactions to another wallet. </h1>
-        <button onClick={() => setPage('query')}>Query blockchain</button>
-        <button onClick={() => setPage('transact')}>Send test transaction</button>
+        <h5 className="Inline">What would you like to do?</h5>
+        <button className="Button" onClick={() => { setPage('query')
+                                                    reset()}}> Query the blockchain</button>
+        <button className="Button" onClick={() => {setPage('transact')
+                                                    reset()}}>Send test transaction</button>
       </div>
       
       {(() => {
         if(page === 'query') {
           return(
-            <div>
+            <div className="Body">
               <input placeholder="Find account balance" onChange={event => setAddress(event.target.value)}></input>
               <button onClick={() => main()}> click me </button>
-              <h1>{eth}</h1>
+              <Greeting />
             </div>
           )
         }
         if(page === 'transact') {
           return(
-          <div>
+          <div className="Body">
             <input placeholder="Send tx to this account" onChange={event => setSendAddress(event.target.value)}></input>
             <input placeholder="# of eth to send" onChange={event => setValue(event.target.value)}></input>
             <button onClick={() => sendTransaction()}> Send transaction </button>

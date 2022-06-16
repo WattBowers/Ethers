@@ -1,5 +1,24 @@
 .App {
   text-align: center;
+  display: grid;
+  justify-items: center;
+}
+
+.Header {
+  height: 300px;
+  width: 80vw;
+}
+
+Body {
+  height: 600px;
+}
+
+.Inline {
+  display: inline-block;
+}
+
+.Button {
+  margin: 5px;
 }
 
 .App-logo {
